@@ -36,3 +36,14 @@ function fileChangeInformation($filename, $newMessage){
 }
 
 // fileChangeInformation("src/files/input_file_z3.txt", "3 задание функция изменения данных в файле, Новая информация");
+
+function fileDelete($fileName){
+    $fs.unlink($fileName, function ($error) {
+        if($error){
+            return console.log('Произошла ошибка! Видимо выбранного файла не существует! =^(');
+        }
+        console.log(`Файл "${$fileName}" был успешно удалён! =^)`);
+    })
+}
+
+fileDelete('src/files/deleted_file_z4.txt');
