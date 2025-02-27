@@ -77,4 +77,25 @@ function fileUnNoise($fileName){
     }
 }
 
-fileUnNoise('src/files/noise_file_z5.txt');
+// fileUnNoise('src/files/noise_file_z5.txt');
+
+function copyFileInformation($firstFileName, $secondFileName){
+    let $text;
+    try{
+        $text = $fs.readFileSync($firstFileName).toString();
+    }catch(e){
+        return console.log(`Ошибка! Видимо первого файла, ${$firstFileName}, не существует! =^(`);
+    }
+    try{
+        $fs.writeFile($secondFileName, $text, function ($error) {
+            if($error){
+                return console.log('Ошибка при копировании в несуществующий файл! =^(');
+            }
+            console.log('Данные успешно скопированы в файл! =^)');
+        });
+    }catch(e){
+        return console.log(`Ошибка! Видимо второго файла, ${$secondFileName}, не существует! =^(`);
+    }
+}
+
+copyFileInformation('src/files/input_file_z6.txt', 'src/files/output_file_z6.txt');
