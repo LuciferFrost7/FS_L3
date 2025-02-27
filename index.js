@@ -21,4 +21,18 @@ function fileRead($fileName){
     })
 }
 
-fileRead('src/files/input_file_z2.txt');
+// fileRead('src/files/input_file_z2.txt');
+
+function fileChangeInformation($filename, $newMessage){
+    // 3 Задание информация, которая была в файле раньше =^)
+    console.log(`Прошлая информация:\n${$fs.readFileSync($filename).toString()}\n`);
+
+    $fs.writeFile($filename, $newMessage, function ($error) {
+        if($error){
+            return console.log("Произошла ошибка при записи информации в файл! =^(");
+        }
+        console.log('Выбранный файл был успешно изменён! =^)');
+    });
+}
+
+// fileChangeInformation("src/files/input_file_z3.txt", "3 задание функция изменения данных в файле, Новая информация");
