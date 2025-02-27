@@ -46,4 +46,35 @@ function fileDelete($fileName){
     })
 }
 
-fileDelete('src/files/deleted_file_z4.txt');
+// fileDelete('src/files/deleted_file_z4.txt');
+
+function fileUnNoise($fileName){
+    try {
+        function unNoise($str) {
+            const confirmChars = "qwertyuiopasdfghjklzxcvbnm' ";
+            let $finalString = '';
+            let $count = 0;
+            for (let $i = 0; $i < $str.length; $i++) {
+                if (confirmChars.includes($str[$i].toLowerCase())) {
+                    $finalString += $str[$i].toLowerCase();
+                    continue;
+                }
+                $count++;
+            }
+            return {"string": $finalString, "count": $count};
+        }
+
+        // $$$A$$$$$$b/*-!@#$!@#o!@#$@#^$&^*!@236461283%$$#470b12341234a 123421341$$$$$$2344f!_@#+o12830$@948r ME it's s0ome23$$$$$4123th111in-03214g
+        let $result = unNoise($fs.readFileSync($fileName).toString());
+        $fs.writeFileSync($fileName, $result["string"]);
+        if($result['count']) {
+            console.log(`Из файла "${$fileName}" было отчищено (${$result["count"]}) шумов! =^)`);
+        }else{
+            console.log(`Файл "${$fileName}" не содержит шумов!`);
+        }
+    }catch(e){
+        console.log('Ошибка! Видимо данного файла не существует! =^(');
+    }
+}
+
+fileUnNoise('src/files/noise_file_z5.txt');
