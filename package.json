@@ -1,0 +1,26 @@
+{
+  "name": "fs_l3",
+  "version": "1.0.0",
+  "description": "3 laba for vebprog subject",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuciferFrost7/FS_L3.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Kiryll Korzhenevskiy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuciferFrost7/FS_L3/issues"
+  },
+  "homepage": "https://github.com/LuciferFrost7/FS_L3#readme",
+  "dependencies": {
+    "start": "^5.1.0"
+  }
+}
