@@ -121,4 +121,24 @@ function directoryDelete($directoryName){
     });
 }
 
-directoryDelete('src/new_folder');
+// directoryDelete('src/new_folder');
+
+function getAllFilesInDirectory() {
+    function getFilesNamesFromDirectory($directoryPath) {
+        try {
+            let $files = $fs.readdirSync($directoryPath);
+            let $lst_dir = {};
+            if ($files) {
+                for (let $i = 0; $i < $files.length; $i++) {
+                    $lst_dir[$files[$i]] = getFilesNamesFromDirectory($directoryPath + '/' + $files[$i]);
+                }
+            }
+            return $lst_dir;
+        } catch (e) {
+            return 'file';
+        }
+    }
+    return {"src" : getFilesNamesFromDirectory('src')};
+}
+
+console.log(getAllFilesInDirectory());
