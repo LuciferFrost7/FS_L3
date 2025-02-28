@@ -98,4 +98,15 @@ function copyFileInformation($firstFileName, $secondFileName){
     }
 }
 
-copyFileInformation('src/files/input_file_z6.txt', 'src/files/output_file_z6.txt');
+// copyFileInformation('src/files/input_file_z6.txt', 'src/files/output_file_z6.txt');
+
+function directoryCreate($directoryName){
+    $fs.mkdir($directoryName, function($error){
+        if($error){
+            return console.log(`Ошибка при создании папки! =^(`);
+        }
+        console.log(`Директория ${$directoryName} успешно создана! =^)`)
+    });
+}
+
+directoryCreate("src/folders/new_folder");
