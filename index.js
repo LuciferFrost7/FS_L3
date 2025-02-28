@@ -109,4 +109,4 @@ function directoryCreate($directoryName){
     });
 }
 
-directoryCreate("src/folders/new_folder");
+directoryCreate("src/new_folder");
