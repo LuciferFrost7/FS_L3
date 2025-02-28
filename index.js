@@ -109,4 +109,15 @@ function directoryCreate($directoryName){
     });
 }
 
-directoryCreate("src/folders/new_folder");
+// directoryCreate("src/new_folder");
+
+function directoryDelete($directoryName){
+    $fs.rmdir($directoryName, function($error){
+        if($error){
+            return console.log(`Ошибка при удалении папки! Видимо выбранная папка ${$directoryName} не существует =^(`);
+        }
+        console.log(`Директория ${$directoryName} успешно удалена! =^)`);
+    });
+}
+
+directoryDelete('src/new_folder');
