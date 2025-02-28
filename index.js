@@ -43,7 +43,7 @@ function fileDelete($fileName){
             return console.log('Произошла ошибка! Видимо выбранного файла не существует! =^(');
         }
         console.log(`Файл "${$fileName}" был успешно удалён! =^)`);
-    })
+    });
 }
 
 // fileDelete('src/files/deleted_file_z4.txt');
@@ -141,4 +141,52 @@ function getAllFilesInDirectory() {
     return {"src" : getFilesNamesFromDirectory('src')};
 }
 
-console.log(getAllFilesInDirectory());
+// console.log(getAllFilesInDirectory());
+
+let $serviceFiles = [
+    'src',
+    'src\\files',
+    'src\\files\\input_file_z2.txt',
+    'src\\files\\input_file_z3.txt',
+    'src\\files\\input_file_z6.txt',
+    'src\\files\\noise_file_z5.txt',
+    'src\\libs',
+    'src\\libs\\deleted_file_z4.txt'
+];
+
+function deleteAllFilesInDirectory() {
+    function deleteFilesFromMainDirectory($directoryPath) {
+        try{
+            let $files = $fs.readdirSync($directoryPath);
+            if ($files) {
+                for (let $i = 0; $i < $files.length; $i++) {
+                    deleteFilesFromMainDirectory($directoryPath + '/' + $files[$i]);
+                    let $flag = true;
+                    let $fullPath = $fs.realpathSync($directoryPath + '/' + $files[$i]);
+                    for(let $j  = 0; $j < $serviceFiles.length; $j++) {
+                        if($fullPath.endsWith($serviceFiles[$j])){
+                            $flag = false;
+                            break;
+                        }
+                    }
+                    if($flag){
+                        $fs.rmdir($directoryPath + '/' + $files[$i], function($error){
+                            if($error){
+                            }
+                        });
+                        $fs.unlink($directoryPath + '/' + $files[$i], function ($error) {
+                            if($error){
+                                return console.log('Произошла ошибка! Видимо выбранного файла или директории не существует! =^(');
+                            }
+                        });
+                        console.log(`Директория или файл ${$directoryPath + '/' + $files[$i]} Удалён успешно!`);
+                    }
+                }
+            }
+        } catch (e) {
+        }
+    }
+    deleteFilesFromMainDirectory('src');
+}
+
+deleteAllFilesInDirectory();
